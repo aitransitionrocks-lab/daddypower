@@ -26,6 +26,9 @@ export interface ResultType {
   strengths: string[]
   risks: string[]
   nextStep: string
+  // YouTube Video-ID (z.B. 'dQw4w9WgXcQ' aus youtube.com/watch?v=dQw4w9WgXcQ)
+  // Platzhalter bis echte Videos vorhanden sind
+  videoId: string
 }
 
 // ---- ERGEBNISTYPEN ----
@@ -49,6 +52,7 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
     ],
     nextStep:
       'Du brauchst keine neue Disziplin. Du brauchst eine echte Grundlage – einen Reset, der dich wieder spüren lässt, was Energie wirklich bedeutet.',
+    videoId: 'PLATZHALTER_ERSCHOEPFT',
   },
   funktionierer: {
     id: 'funktionierer',
@@ -68,6 +72,7 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
     ],
     nextStep:
       'Du brauchst keinen komplizierten Plan. Du brauchst den Moment, in dem du wieder merkst: Ich mach das hier für mich – nicht nur, weil es jemand erwartet.',
+    videoId: 'PLATZHALTER_FUNKTIONIERER',
   },
   kaempfer: {
     id: 'kaempfer',
@@ -87,6 +92,7 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
     ],
     nextStep:
       'Stark sein heißt nicht, alles allein zu tragen. Der nächste Schritt ist nicht Schwäche – sondern der klügste Move, den du machen kannst: Hol dir Rückenwind.',
+    videoId: 'PLATZHALTER_KAEMPFER',
   },
   performer: {
     id: 'performer',
@@ -106,6 +112,7 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
     ],
     nextStep:
       'Du brauchst keine Motivation. Du brauchst ein System, das deine Energie intelligent managt – damit dein Drive nachhaltig bleibt.',
+    videoId: 'PLATZHALTER_PERFORMER',
   },
 }
 

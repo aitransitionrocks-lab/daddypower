@@ -62,33 +62,20 @@ export async function submitLead(data: {
     return { success: true, id: 'local-dev' }
   }
 
-  const { data: result, error } = await supabase
+  const { error } = await supabase
     .from('leads')
     .insert({
       ...data,
       ...utm,
     })
-    .select('id')
-    .single()
 
   if (error) {
-    // Duplikat-E-Mail: Update statt Insert
+    // Duplikat-E-Mail: kein harter Fehler
     if (error.code === '23505') {
-      const { error: updateError } = await supabase
-        .from('leads')
-        .update({
-          quiz_result_type: data.quiz_result_type,
-          quiz_answers: data.quiz_answers,
-          biggest_challenge: data.biggest_challenge,
-          interest: data.interest,
-        })
-        .eq('email', data.email)
-
-      if (updateError) throw updateError
-      return { success: true, id: 'updated' }
+      return { success: true, id: 'duplicate' }
     }
     throw error
   }
 
-  return { success: true, id: result.id }
+  return { success: true, id: 'created' }
 }
