@@ -3,14 +3,14 @@ import { supabase } from '../lib/supabase'
 import { useI18n } from '../i18n'
 import type { ResultTypeId } from '../data/quiz'
 
-const RESULT_TYPES: ResultTypeId[] = ['erschoepft', 'funktionierer', 'kaempfer', 'performer']
+const RESULT_TYPES: ResultTypeId[] = ['leerer_akku', 'funktionierer', 'stiller_kaempfer', 'performer_auf_reserve']
 const LANGUAGES = ['de', 'en'] as const
 
 interface Lead {
   id: string
   email: string
   first_name: string | null
-  quiz_result_type: string | null
+  result_type: string | null
   biggest_challenge: string | null
   created_at: string
 }
@@ -26,8 +26,9 @@ interface ResultVideo {
   id: string
   result_type: string
   language: string
-  video_url: string
-  video_type: string
+  url: string
+  asset_type: string
+  is_public: boolean
 }
 
 export default function AdminPage() {
@@ -51,7 +52,7 @@ export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<'kpis' | 'leads' | 'videos'>('kpis')
 
   // Video Upload State
-  const [uploadType, setUploadType] = useState<ResultTypeId>('erschoepft')
+  const [uploadType, setUploadType] = useState<ResultTypeId>('leerer_akku')
   const [uploadLang, setUploadLang] = useState<'de' | 'en'>('de')
   const [uploadMode, setUploadMode] = useState<'upload' | 'youtube'>('youtube')
   const [youtubeUrl, setYoutubeUrl] = useState('')
@@ -118,12 +119,12 @@ export default function AdminPage() {
     // Leads
     let query = supabase
       .from('leads')
-      .select('id, email, first_name, quiz_result_type, biggest_challenge, created_at')
+      .select('id, email, first_name, result_type, biggest_challenge, created_at')
       .order('created_at', { ascending: false })
       .limit(100)
 
     if (filterType) {
-      query = query.eq('quiz_result_type', filterType)
+      query = query.eq('result_type', filterType)
     }
 
     const { data: leadsData } = await query
@@ -131,7 +132,7 @@ export default function AdminPage() {
 
     // Videos
     const { data: videosData } = await supabase
-      .from('result_videos')
+      .from('content_assets')
       .select('*')
       .order('result_type')
 
@@ -151,7 +152,6 @@ export default function AdminPage() {
 
     try {
       let videoUrl = ''
-      let videoType = uploadMode
 
       if (uploadMode === 'youtube') {
         videoUrl = youtubeUrl
@@ -172,18 +172,24 @@ export default function AdminPage() {
 
       if (!videoUrl) return
 
-      // Upsert: existierendes Video ersetzen
+      // Existierendes Video löschen falls vorhanden, dann neu einfügen
+      await supabase
+        .from('content_assets')
+        .delete()
+        .eq('asset_type', 'video')
+        .eq('result_type', uploadType)
+        .eq('language', uploadLang)
+
       const { error } = await supabase
-        .from('result_videos')
-        .upsert(
-          {
-            result_type: uploadType,
-            language: uploadLang,
-            video_url: videoUrl,
-            video_type: videoType,
-          },
-          { onConflict: 'result_type,language' }
-        )
+        .from('content_assets')
+        .insert({
+          asset_type: 'video',
+          title: `Video: ${uploadType} (${uploadLang})`,
+          result_type: uploadType,
+          language: uploadLang,
+          url: videoUrl,
+          is_public: true,
+        })
 
       if (error) throw error
 
@@ -199,7 +205,7 @@ export default function AdminPage() {
   }
 
   const deleteVideo = async (id: string) => {
-    await supabase.from('result_videos').delete().eq('id', id)
+    await supabase.from('content_assets').delete().eq('id', id)
     await loadData()
   }
 
@@ -335,9 +341,9 @@ export default function AdminPage() {
                       <td className="px-4 py-3 text-kraft-dark">{lead.email}</td>
                       <td className="px-4 py-3 text-kraft-dark">{lead.first_name || '–'}</td>
                       <td className="px-4 py-3">
-                        {lead.quiz_result_type ? (
+                        {lead.result_type ? (
                           <span className="bg-kraft-accent/10 text-kraft-accent text-xs px-2 py-1 rounded-full">
-                            {t.results.types[lead.quiz_result_type]?.title || lead.quiz_result_type}
+                            {t.results.types[lead.result_type]?.title || lead.result_type}
                           </span>
                         ) : '–'}
                       </td>
@@ -385,10 +391,10 @@ export default function AdminPage() {
                         {video ? (
                           <div className="flex items-center gap-3">
                             <span className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded">
-                              {video.video_type}
+                              {video.url?.includes('youtu') ? 'youtube' : 'upload'}
                             </span>
                             <a
-                              href={video.video_url}
+                              href={video.url}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="text-xs text-kraft-accent underline"

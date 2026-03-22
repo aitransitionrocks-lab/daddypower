@@ -49,7 +49,7 @@ export async function trackEvent(
 export async function submitLead(data: {
   email: string
   first_name?: string
-  quiz_result_type?: string
+  result_type?: string
   quiz_answers?: Record<string, string>
   biggest_challenge?: string
   interest?: string[]

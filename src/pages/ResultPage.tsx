@@ -42,15 +42,19 @@ export default function ResultPage() {
     if (!resultTypeId || !isSupabaseConfigured()) return
 
     supabase
-      .from('result_videos')
-      .select('video_url, video_type')
+      .from('content_assets')
+      .select('url, metadata')
+      .eq('asset_type', 'video')
       .eq('result_type', resultTypeId)
       .eq('language', lang)
+      .eq('is_public', true)
       .single()
       .then(({ data }) => {
         if (data) {
-          setVideoUrl(data.video_url)
-          setVideoType(data.video_type)
+          setVideoUrl(data.url)
+          // YouTube-URL erkennen
+          const isYt = data.url?.includes('youtube') || data.url?.includes('youtu.be')
+          setVideoType(isYt ? 'youtube' : 'upload')
         } else {
           setVideoUrl(null)
         }
@@ -82,7 +86,7 @@ export default function ResultPage() {
       const res = await submitLead({
         email,
         first_name: firstName || undefined,
-        quiz_result_type: resultTypeId || undefined,
+        result_type: resultTypeId || undefined,
         quiz_answers: answers,
         interest: ['community', 'challenge'],
         consent,

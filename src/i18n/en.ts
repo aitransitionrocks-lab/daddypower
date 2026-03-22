@@ -126,7 +126,7 @@ export const en: Translations = {
     errorRequired: 'Please enter your email and confirm the privacy policy.',
     errorGeneric: 'Something went wrong. Please try again.',
     types: {
-      erschoepft: {
+      leerer_akku: {
         title: 'The Empty Battery',
         subtitle: "You give more than you've got.",
         description:
@@ -162,7 +162,7 @@ export const en: Translations = {
         nextStep:
           "You don't need a complicated plan. You need the moment when you realize: I'm doing this for me – not just because someone expects it.",
       },
-      kaempfer: {
+      stiller_kaempfer: {
         title: 'The Silent Fighter',
         subtitle: 'You carry more than others see.',
         description:
@@ -180,7 +180,7 @@ export const en: Translations = {
         nextStep:
           "Being strong doesn't mean carrying everything alone. The next step isn't weakness – it's the smartest move you can make: get some tailwind.",
       },
-      performer: {
+      performer_auf_reserve: {
         title: 'The Performer on Reserve',
         subtitle: "You're going full throttle – but the tank isn't full.",
         description:

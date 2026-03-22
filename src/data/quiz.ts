@@ -16,7 +16,7 @@ export interface QuizQuestion {
   options: QuizOption[]
 }
 
-export type ResultTypeId = 'erschoepft' | 'funktionierer' | 'kaempfer' | 'performer'
+export type ResultTypeId = 'leerer_akku' | 'funktionierer' | 'stiller_kaempfer' | 'performer_auf_reserve'
 
 export interface ResultType {
   id: ResultTypeId
@@ -34,8 +34,8 @@ export interface ResultType {
 // ---- ERGEBNISTYPEN ----
 
 export const resultTypes: Record<ResultTypeId, ResultType> = {
-  erschoepft: {
-    id: 'erschoepft',
+  leerer_akku: {
+    id: 'leerer_akku',
     title: 'Der Leere Akku',
     subtitle: 'Du gibst mehr, als du hast.',
     description:
@@ -74,8 +74,8 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
       'Du brauchst keinen komplizierten Plan. Du brauchst den Moment, in dem du wieder merkst: Ich mach das hier für mich – nicht nur, weil es jemand erwartet.',
     videoId: 'PLATZHALTER_FUNKTIONIERER',
   },
-  kaempfer: {
-    id: 'kaempfer',
+  stiller_kaempfer: {
+    id: 'stiller_kaempfer',
     title: 'Der stille Kämpfer',
     subtitle: 'Du trägst mehr, als andere sehen.',
     description:
@@ -94,8 +94,8 @@ export const resultTypes: Record<ResultTypeId, ResultType> = {
       'Stark sein heißt nicht, alles allein zu tragen. Der nächste Schritt ist nicht Schwäche – sondern der klügste Move, den du machen kannst: Hol dir Rückenwind.',
     videoId: 'PLATZHALTER_KAEMPFER',
   },
-  performer: {
-    id: 'performer',
+  performer_auf_reserve: {
+    id: 'performer_auf_reserve',
     title: 'Der Performer auf Reserve',
     subtitle: 'Du gibst Vollgas – aber der Tank ist nicht voll.',
     description:
@@ -126,22 +126,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q1a',
         text: 'Erschlagen. Ich könnte direkt weiterschlafen.',
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q1b',
         text: 'Okay, aber ohne echte Energie. Autopilot an.',
-        scores: { erschoepft: 1, funktionierer: 3, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 3, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q1c',
         text: 'Ich stehe auf, weil ich muss. Nicht weil ich will.',
-        scores: { erschoepft: 1, funktionierer: 1, kaempfer: 3, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 1, stiller_kaempfer: 3, performer_auf_reserve: 0 },
       },
       {
         id: 'q1d',
         text: 'Wach, aber irgendwie nie richtig erholt.',
-        scores: { erschoepft: 0, funktionierer: 1, kaempfer: 0, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 1, stiller_kaempfer: 0, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -152,22 +152,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q2a',
         text: 'Couch, Netflix, einschlafen – keine Energie für mehr.',
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 0, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 0, performer_auf_reserve: 0 },
       },
       {
         id: 'q2b',
         text: 'Ich erledige noch Dinge, obwohl ich eigentlich fertig bin.',
-        scores: { erschoepft: 0, funktionierer: 3, kaempfer: 1, performer: 1 },
+        scores: { leerer_akku: 0, funktionierer: 3, stiller_kaempfer: 1, performer_auf_reserve: 1 },
       },
       {
         id: 'q2c',
         text: 'Ich versuche, für alle da zu sein – und vergesse mich selbst.',
-        scores: { erschoepft: 1, funktionierer: 0, kaempfer: 3, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 0, stiller_kaempfer: 3, performer_auf_reserve: 0 },
       },
       {
         id: 'q2d',
         text: 'Ich trainiere oder arbeite noch – Abschalten fällt mir schwer.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 1, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 1, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -178,22 +178,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q3a',
         text: 'Ich halte durch, bis nichts mehr geht.',
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q3b',
         text: 'Ich mach einfach weiter – wie immer.',
-        scores: { erschoepft: 0, funktionierer: 3, kaempfer: 1, performer: 1 },
+        scores: { leerer_akku: 0, funktionierer: 3, stiller_kaempfer: 1, performer_auf_reserve: 1 },
       },
       {
         id: 'q3c',
         text: "Ich rede nicht drüber. Ich schluck's runter.",
-        scores: { erschoepft: 1, funktionierer: 0, kaempfer: 3, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 0, stiller_kaempfer: 3, performer_auf_reserve: 0 },
       },
       {
         id: 'q3d',
         text: 'Ich versuche, noch härter zu pushen.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 0, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 0, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -204,22 +204,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q4a',
         text: 'Kann mich nicht erinnern. Ist ewig her.',
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q4b',
         text: 'Ab und zu, aber es fühlt sich fast egoistisch an.',
-        scores: { erschoepft: 0, funktionierer: 1, kaempfer: 3, performer: 0 },
+        scores: { leerer_akku: 0, funktionierer: 1, stiller_kaempfer: 3, performer_auf_reserve: 0 },
       },
       {
         id: 'q4c',
         text: 'Ich schiebe es immer auf – die Liste ist zu lang.',
-        scores: { erschoepft: 1, funktionierer: 3, kaempfer: 0, performer: 1 },
+        scores: { leerer_akku: 1, funktionierer: 3, stiller_kaempfer: 0, performer_auf_reserve: 1 },
       },
       {
         id: 'q4d',
         text: 'Regelmäßig, aber selbst das fühlt sich nach Leistung an.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 0, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 0, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -230,22 +230,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q5a',
         text: 'Einfach mal wieder Energie haben. Richtig wach sein.',
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 0, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 0, performer_auf_reserve: 0 },
       },
       {
         id: 'q5b',
         text: 'Dass sich der Alltag nicht mehr nur nach Pflicht anfühlt.',
-        scores: { erschoepft: 0, funktionierer: 3, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 0, funktionierer: 3, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q5c',
         text: 'Dass jemand versteht, wie viel ich trage.',
-        scores: { erschoepft: 1, funktionierer: 0, kaempfer: 3, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 0, stiller_kaempfer: 3, performer_auf_reserve: 0 },
       },
       {
         id: 'q5d',
         text: 'Nachhaltige Performance – ohne auszubrennen.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 0, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 0, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -256,22 +256,22 @@ export const quizQuestions: QuizQuestion[] = [
       {
         id: 'q6a',
         text: "Ich schaff's kaum noch. Keine Zeit, keine Kraft.",
-        scores: { erschoepft: 3, funktionierer: 1, kaempfer: 1, performer: 0 },
+        scores: { leerer_akku: 3, funktionierer: 1, stiller_kaempfer: 1, performer_auf_reserve: 0 },
       },
       {
         id: 'q6b',
         text: 'Ab und zu, aber es fehlt die Regelmäßigkeit.',
-        scores: { erschoepft: 1, funktionierer: 3, kaempfer: 0, performer: 0 },
+        scores: { leerer_akku: 1, funktionierer: 3, stiller_kaempfer: 0, performer_auf_reserve: 0 },
       },
       {
         id: 'q6c',
         text: 'Ich bewege mich – aber eher für die Familie als für mich.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 3, performer: 1 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 3, performer_auf_reserve: 1 },
       },
       {
         id: 'q6d',
         text: 'Ich trainiere viel, aber die Ergebnisse stagnieren.',
-        scores: { erschoepft: 0, funktionierer: 0, kaempfer: 0, performer: 3 },
+        scores: { leerer_akku: 0, funktionierer: 0, stiller_kaempfer: 0, performer_auf_reserve: 3 },
       },
     ],
   },
@@ -281,10 +281,10 @@ export const quizQuestions: QuizQuestion[] = [
 
 export function calculateResult(answers: Record<string, string>): ResultTypeId {
   const scores: Record<ResultTypeId, number> = {
-    erschoepft: 0,
+    leerer_akku: 0,
     funktionierer: 0,
-    kaempfer: 0,
-    performer: 0,
+    stiller_kaempfer: 0,
+    performer_auf_reserve: 0,
   }
 
   for (const question of quizQuestions) {
@@ -298,7 +298,7 @@ export function calculateResult(answers: Record<string, string>): ResultTypeId {
   }
 
   // Höchste Punktzahl gewinnt
-  let best: ResultTypeId = 'erschoepft'
+  let best: ResultTypeId = 'leerer_akku'
   for (const [type, score] of Object.entries(scores)) {
     if (score > scores[best]) {
       best = type as ResultTypeId

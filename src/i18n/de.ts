@@ -126,7 +126,7 @@ export const de: Translations = {
     errorRequired: 'Bitte gib deine E-Mail ein und bestätige die Datenschutzerklärung.',
     errorGeneric: 'Etwas ist schiefgelaufen. Bitte versuche es erneut.',
     types: {
-      erschoepft: {
+      leerer_akku: {
         title: 'Der Leere Akku',
         subtitle: 'Du gibst mehr, als du hast.',
         description:
@@ -162,7 +162,7 @@ export const de: Translations = {
         nextStep:
           'Du brauchst keinen komplizierten Plan. Du brauchst den Moment, in dem du wieder merkst: Ich mach das hier für mich – nicht nur, weil es jemand erwartet.',
       },
-      kaempfer: {
+      stiller_kaempfer: {
         title: 'Der stille Kämpfer',
         subtitle: 'Du trägst mehr, als andere sehen.',
         description:
@@ -180,7 +180,7 @@ export const de: Translations = {
         nextStep:
           'Stark sein heißt nicht, alles allein zu tragen. Der nächste Schritt ist nicht Schwäche – sondern der klügste Move, den du machen kannst: Hol dir Rückenwind.',
       },
-      performer: {
+      performer_auf_reserve: {
         title: 'Der Performer auf Reserve',
         subtitle: 'Du gibst Vollgas – aber der Tank ist nicht voll.',
         description:
