@@ -3,8 +3,7 @@ import { useEffect } from 'react'
 import { trackEvent } from '../lib/tracking'
 import { resultTypes, type ResultTypeId } from '../data/quiz'
 
-// PLATZHALTER – wird durch echten Link ersetzt
-const WHATSAPP_GROUP_LINK = 'https://chat.whatsapp.com/PLATZHALTER'
+const WHATSAPP_GROUP_LINK = 'https://whatsapp.com/channel/0029VbCHGtX60eBgfdGLzT12'
 
 export default function ThankYouPage() {
   const location = useLocation()
