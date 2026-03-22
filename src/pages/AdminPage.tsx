@@ -35,15 +35,6 @@ export default function AdminPage() {
   const { t } = useI18n()
   const a = t.admin
 
-  const [session, setSession] = useState<boolean>(false)
-  const [loading, setLoading] = useState(true)
-
-  // Login State
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loginLoading, setLoginLoading] = useState(false)
-  const [loginError, setLoginError] = useState('')
-
   // Dashboard State
   const [kpis, setKpis] = useState<KPIs>({ leadsTotal: 0, leadsToday: 0, quizCompleted: 0, conversion: 0 })
   const [leads, setLeads] = useState<Lead[]>([])
@@ -59,32 +50,9 @@ export default function AdminPage() {
   const [uploadFile, setUploadFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
 
-  // Check Auth
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(!!data.session)
-      setLoading(false)
-    })
-  }, [])
-
-  const login = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoginLoading(true)
-    setLoginError('')
-
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-    if (error) {
-      setLoginError(a.loginError)
-    } else {
-      setSession(true)
-    }
-    setLoginLoading(false)
-  }
-
-  const logout = async () => {
+  const handleLogout = async () => {
     await supabase.auth.signOut()
-    setSession(false)
+    window.location.href = '/login'
   }
 
   // Load Dashboard Data
@@ -140,10 +108,8 @@ export default function AdminPage() {
   }, [filterType])
 
   useEffect(() => {
-    if (session) {
-      loadData()
-    }
-  }, [session, loadData])
+    loadData()
+  }, [loadData])
 
   // Video Upload
   const handleVideoUpload = async (e: React.FormEvent) => {
@@ -209,51 +175,6 @@ export default function AdminPage() {
     await loadData()
   }
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-kraft-muted">Loading...</div>
-  }
-
-  // ---- LOGIN ----
-  if (!session) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
-        <div className="w-full max-w-sm">
-          <h1 className="text-2xl font-bold text-kraft-dark text-center mb-8">{a.loginTitle}</h1>
-          <form onSubmit={login} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-kraft-dark mb-1">{a.email}</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kraft-accent focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-kraft-dark mb-1">{a.password}</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kraft-accent focus:outline-none"
-              />
-            </div>
-            {loginError && <p className="text-red-500 text-sm">{loginError}</p>}
-            <button
-              type="submit"
-              disabled={loginLoading}
-              className="w-full bg-kraft-dark hover:bg-kraft-navy text-white font-semibold py-3 rounded-xl transition-all cursor-pointer"
-            >
-              {loginLoading ? a.loggingIn : a.loginButton}
-            </button>
-          </form>
-        </div>
-      </div>
-    )
-  }
-
   // ---- DASHBOARD ----
   return (
     <div className="min-h-screen bg-gray-50">
@@ -261,7 +182,7 @@ export default function AdminPage() {
       <header className="bg-kraft-dark text-white px-6 py-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">daddypower {a.dashboard}</h1>
         <button
-          onClick={logout}
+          onClick={handleLogout}
           className="text-sm text-gray-300 hover:text-white underline cursor-pointer"
         >
           {a.logout}

@@ -62,11 +62,15 @@ export async function submitLead(data: {
     return { success: true, id: 'local-dev' }
   }
 
+  // Insert mit language aus Browser
+  const lang = localStorage.getItem('dp_lang') || navigator.language.slice(0, 2) === 'de' ? 'de' : 'en'
+
   const { error } = await supabase
     .from('leads')
     .insert({
       ...data,
       ...utm,
+      language: lang,
     })
 
   if (error) {
@@ -75,6 +79,26 @@ export async function submitLead(data: {
       return { success: true, id: 'duplicate' }
     }
     throw error
+  }
+
+  // Trigger email sequence (fire-and-forget)
+  // Get lead ID for the edge function
+  try {
+    const { data: lead } = await supabase
+      .from('leads')
+      .select('id')
+      .eq('email', data.email)
+      .single()
+
+    if (lead?.id) {
+      supabase.functions.invoke('on-lead-created', {
+        body: { leadId: lead.id },
+      }).catch(() => {
+        // Edge function may not be deployed yet – ok
+      })
+    }
+  } catch {
+    // Non-critical – email sequence is a bonus
   }
 
   return { success: true, id: 'created' }
