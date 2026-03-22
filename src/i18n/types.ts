@@ -80,6 +80,108 @@ export interface Translations {
     footer: string
   }
 
+  // Check-in
+  checkIn: {
+    title: string
+    subtitle: string
+    energyLevel: string
+    moodScore: string
+    sleepHours: string
+    stressLevel: string
+    notes: string
+    notesPlaceholder: string
+    submit: string
+    submitting: string
+    successTitle: string
+    successMessage: string
+    streakLabel: string
+    streakDays: string
+    alreadyCheckedIn: string
+    updateButton: string
+    energyLow: string
+    energyHigh: string
+    moodLow: string
+    moodHigh: string
+    stressLow: string
+    stressHigh: string
+    sleepPlaceholder: string
+    errorGeneric: string
+  }
+
+  // Partner Dashboard
+  partner: {
+    title: string
+    subtitle: string
+    statusLabel: string
+    levelLabel: string
+    displayNameLabel: string
+    downlineTitle: string
+    downlineCount: string
+    inviteTokensTitle: string
+    noTokens: string
+    createInviteButton: string
+    copyLink: string
+    copied: string
+    tokenExpires: string
+    tokenUsed: string
+    challengesTitle: string
+    noChallenges: string
+    notPartnerTitle: string
+    notPartnerMessage: string
+    errorGeneric: string
+  }
+
+  // Invite
+  invite: {
+    title: string
+    subtitle: string
+    invitedBy: string
+    ctaSignup: string
+    invalidTitle: string
+    invalidMessage: string
+    loadingMessage: string
+    errorGeneric: string
+  }
+
+  // Workouts
+  workouts: {
+    title: string
+    filterType: string
+    filterDuration: string
+    filterDifficulty: string
+    all: string
+    minutes: string
+    easy: string
+    medium: string
+    hard: string
+    noEquipment: string
+    completeWorkout: string
+    completed: string
+    exercises: string
+    sets: string
+    reps: string
+    rest: string
+    empty: string
+    back: string
+  }
+
+  // Challenges
+  challenges: {
+    title: string
+    days: string
+    enroll: string
+    enrolled: string
+    active: string
+    completedLabel: string
+    completeDay: string
+    dayOf: string
+    restDay: string
+    progress: string
+    empty: string
+    allCompleted: string
+    back: string
+  }
+
   // Admin
   admin: {
     loginTitle: string

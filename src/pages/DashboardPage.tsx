@@ -113,48 +113,24 @@ export default function DashboardPage() {
           ) : null}
         </div>
 
-        {/* Quick Stats */}
+        {/* Quick Navigation */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {[
-            { label: 'Workouts', value: '–', sub: 'Bald verfügbar' },
-            { label: 'Check-ins', value: '–', sub: 'Bald verfügbar' },
-            { label: 'Challenge', value: '–', sub: 'Bald verfügbar' },
-            { label: 'Streak', value: '–', sub: 'Bald verfügbar' },
-          ].map((stat) => (
-            <div key={stat.label} className="bg-white rounded-xl p-4 shadow-sm text-center">
-              <p className="text-2xl font-bold text-kraft-dark">{stat.value}</p>
-              <p className="text-sm font-medium text-kraft-dark">{stat.label}</p>
-              <p className="text-xs text-kraft-muted mt-1">{stat.sub}</p>
-            </div>
+            { label: '💪 Workouts', href: '/workouts', desc: 'Trainieren' },
+            { label: '📊 Check-in', href: '/checkin', desc: 'Tages-Check' },
+            { label: '🎯 Challenges', href: '/challenges', desc: 'Mitmachen' },
+            { label: '🤝 Partner', href: '/partner', desc: 'Netzwerk' },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="bg-white rounded-xl p-4 shadow-sm text-center hover:shadow-md transition-all block"
+            >
+              <p className="text-2xl mb-1">{item.label.split(' ')[0]}</p>
+              <p className="text-sm font-medium text-kraft-dark">{item.label.split(' ')[1]}</p>
+              <p className="text-xs text-kraft-muted mt-1">{item.desc}</p>
+            </a>
           ))}
-        </div>
-
-        {/* Content Teaser */}
-        <div className="bg-white rounded-2xl p-6 shadow-sm">
-          <h3 className="text-lg font-bold text-kraft-dark mb-4">Was kommt als nächstes?</h3>
-          <ul className="space-y-3">
-            <li className="flex items-start gap-3">
-              <span className="text-kraft-warm font-bold text-lg">💪</span>
-              <div>
-                <p className="font-medium text-kraft-dark">Workout-Bibliothek</p>
-                <p className="text-sm text-kraft-muted">Kurze, effektive Einheiten für deinen Alltag.</p>
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-kraft-warm font-bold text-lg">🎯</span>
-              <div>
-                <p className="font-medium text-kraft-dark">Challenges</p>
-                <p className="text-sm text-kraft-muted">21-Tage-Programme, die wirklich in deinen Tag passen.</p>
-              </div>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-kraft-warm font-bold text-lg">📊</span>
-              <div>
-                <p className="font-medium text-kraft-dark">Daily Check-in</p>
-                <p className="text-sm text-kraft-muted">Tracke Energie, Schlaf und Stimmung in 30 Sekunden.</p>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
