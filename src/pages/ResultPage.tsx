@@ -153,7 +153,7 @@ export default function ResultPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Result Header */}
@@ -174,7 +174,7 @@ export default function ResultPage() {
 
       {/* Description */}
       <section className="px-6 pb-6 max-w-2xl mx-auto">
-        <div className="bg-gray-50 rounded-2xl p-6 md:p-8">
+        <div className="bg-kraft-offwhite rounded-2xl p-6 md:p-8">
           <p className="text-kraft-dark text-lg leading-relaxed">
             {resultText.description}
           </p>
@@ -242,7 +242,7 @@ export default function ResultPage() {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder={t.results.placeholderName}
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kraft-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 border-2 border-kraft-border rounded-xl focus:border-kraft-accent focus:outline-none transition-colors"
             />
           </div>
 
@@ -257,7 +257,7 @@ export default function ResultPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t.results.placeholderEmail}
               required
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kraft-accent focus:outline-none transition-colors"
+              className="w-full px-4 py-3 border-2 border-kraft-border rounded-xl focus:border-kraft-accent focus:outline-none transition-colors"
             />
           </div>
 
@@ -271,7 +271,7 @@ export default function ResultPage() {
             <span className="text-sm text-kraft-muted">{t.results.consent}</span>
           </label>
 
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {error && <p className="text-kraft-accent text-sm">{error}</p>}
 
           <button
             type="submit"

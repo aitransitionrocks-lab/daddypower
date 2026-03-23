@@ -145,7 +145,7 @@ export default function WorkoutDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-kraft-accent border-t-transparent rounded-full animate-spin" />
       </div>
     )
@@ -153,7 +153,7 @@ export default function WorkoutDetailPage() {
 
   if (error || !workout) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-kraft-offwhite">
         <LanguageSwitcher />
         <div className="max-w-3xl mx-auto px-6 py-16 text-center">
           <p className="text-kraft-muted mb-4">{error || errorLabel}</p>
@@ -169,7 +169,7 @@ export default function WorkoutDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Header */}
@@ -177,7 +177,7 @@ export default function WorkoutDetailPage() {
         <div className="max-w-3xl mx-auto">
           <button
             onClick={() => navigate('/workouts')}
-            className="text-sm text-gray-400 hover:text-white mb-3 inline-flex items-center gap-1 cursor-pointer"
+            className="text-sm text-kraft-muted hover:text-white mb-3 inline-flex items-center gap-1 cursor-pointer"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -186,7 +186,7 @@ export default function WorkoutDetailPage() {
           </button>
 
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+            <span className="text-xs font-semibold uppercase tracking-wide text-kraft-muted">
               {typeLabels[workout.workout_type]?.[lang] ?? workout.workout_type}
             </span>
             <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${difficultyColors[workout.difficulty]}`}>
@@ -196,7 +196,7 @@ export default function WorkoutDetailPage() {
 
           <h1 className="text-2xl md:text-3xl font-bold">{title}</h1>
 
-          <div className="flex items-center gap-1 mt-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-1 mt-2 text-kraft-muted text-sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -250,7 +250,7 @@ export default function WorkoutDetailPage() {
               {workout.exercises.map((exercise, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between border border-gray-100 rounded-xl p-4"
+                  className="flex items-center justify-between border border-kraft-border/50 rounded-xl p-4"
                 >
                   <div>
                     <p className="font-semibold text-kraft-dark">{exercise.name}</p>

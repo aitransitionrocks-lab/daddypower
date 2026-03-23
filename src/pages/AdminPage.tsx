@@ -177,13 +177,13 @@ export default function AdminPage() {
 
   // ---- DASHBOARD ----
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       {/* Header */}
       <header className="bg-kraft-dark text-white px-6 py-4 flex items-center justify-between">
         <h1 className="text-xl font-bold">daddypower {a.dashboard}</h1>
         <button
           onClick={handleLogout}
-          className="text-sm text-gray-300 hover:text-white underline cursor-pointer"
+          className="text-sm text-kraft-border hover:text-white underline cursor-pointer"
         >
           {a.logout}
         </button>
@@ -199,7 +199,7 @@ export default function AdminPage() {
               className={`px-4 py-2 rounded-lg font-medium text-sm cursor-pointer transition-all ${
                 activeTab === tab
                   ? 'bg-kraft-dark text-white'
-                  : 'bg-white text-kraft-dark border border-gray-200 hover:bg-gray-50'
+                  : 'bg-white text-kraft-dark border border-kraft-border hover:bg-kraft-offwhite'
               }`}
             >
               {tab === 'kpis' ? 'KPIs' : tab === 'leads' ? a.leadsTable : a.videoManagement}
@@ -231,7 +231,7 @@ export default function AdminPage() {
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                className="px-3 py-2 border border-kraft-border rounded-lg text-sm"
               >
                 <option value="">{a.allTypes}</option>
                 {RESULT_TYPES.map((type) => (
@@ -244,7 +244,7 @@ export default function AdminPage() {
 
             <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50">
+                <thead className="bg-kraft-offwhite">
                   <tr>
                     <th className="text-left px-4 py-3 font-medium text-kraft-muted">Datum</th>
                     <th className="text-left px-4 py-3 font-medium text-kraft-muted">{a.email}</th>
@@ -255,7 +255,7 @@ export default function AdminPage() {
                 </thead>
                 <tbody>
                   {leads.map((lead) => (
-                    <tr key={lead.id} className="border-t border-gray-100">
+                    <tr key={lead.id} className="border-t border-kraft-border/50">
                       <td className="px-4 py-3 text-kraft-muted">
                         {new Date(lead.created_at).toLocaleDateString('de-DE')}
                       </td>
@@ -301,7 +301,7 @@ export default function AdminPage() {
                     return (
                       <div
                         key={`${type}-${lang}`}
-                        className="flex items-center justify-between border border-gray-100 rounded-lg px-4 py-3"
+                        className="flex items-center justify-between border border-kraft-border/50 rounded-lg px-4 py-3"
                       >
                         <div>
                           <span className="font-medium text-kraft-dark">
@@ -324,7 +324,7 @@ export default function AdminPage() {
                             </a>
                             <button
                               onClick={() => deleteVideo(video.id)}
-                              className="text-xs text-red-500 hover:text-red-700 cursor-pointer"
+                              className="text-xs text-kraft-accent hover:text-kraft-accent-dark cursor-pointer"
                             >
                               {a.deleteVideo}
                             </button>
@@ -349,7 +349,7 @@ export default function AdminPage() {
                     <select
                       value={uploadType}
                       onChange={(e) => setUploadType(e.target.value as ResultTypeId)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 border border-kraft-border rounded-lg text-sm"
                     >
                       {RESULT_TYPES.map((type) => (
                         <option key={type} value={type}>
@@ -363,7 +363,7 @@ export default function AdminPage() {
                     <select
                       value={uploadLang}
                       onChange={(e) => setUploadLang(e.target.value as 'de' | 'en')}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 border border-kraft-border rounded-lg text-sm"
                     >
                       <option value="de">Deutsch</option>
                       <option value="en">English</option>
@@ -374,7 +374,7 @@ export default function AdminPage() {
                     <select
                       value={uploadMode}
                       onChange={(e) => setUploadMode(e.target.value as 'upload' | 'youtube')}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+                      className="w-full px-3 py-2 border border-kraft-border rounded-lg text-sm"
                     >
                       <option value="youtube">YouTube</option>
                       <option value="upload">Datei Upload</option>
@@ -388,7 +388,7 @@ export default function AdminPage() {
                     value={youtubeUrl}
                     onChange={(e) => setYoutubeUrl(e.target.value)}
                     placeholder="YouTube URL oder Video-ID"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-kraft-accent focus:outline-none"
+                    className="w-full px-4 py-3 border-2 border-kraft-border rounded-xl focus:border-kraft-accent focus:outline-none"
                   />
                 ) : (
                   <input

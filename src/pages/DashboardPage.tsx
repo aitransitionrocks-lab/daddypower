@@ -50,7 +50,7 @@ export default function DashboardPage() {
   const resultTitle = resultType ? t.results.types[resultType]?.title : null
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Header */}
@@ -58,7 +58,7 @@ export default function DashboardPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold">daddypower</h1>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-kraft-muted">
               {firstName && `Hey ${firstName}`}
             </p>
           </div>
@@ -66,14 +66,14 @@ export default function DashboardPage() {
             {role && (role === 'super_admin' || role === 'operator') && (
               <a
                 href="/admin"
-                className="text-sm text-gray-300 hover:text-white underline"
+                className="text-sm text-kraft-border hover:text-white underline"
               >
                 Admin
               </a>
             )}
             <button
               onClick={handleLogout}
-              className="text-sm text-gray-300 hover:text-white underline cursor-pointer"
+              className="text-sm text-kraft-border hover:text-white underline cursor-pointer"
             >
               Logout
             </button>

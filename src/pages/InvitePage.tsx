@@ -70,7 +70,7 @@ export default function InvitePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center">
         <LanguageSwitcher />
         <div className="text-center">
           <div className="animate-pulse text-kraft-muted text-lg">{t.invite.loadingMessage}</div>
@@ -81,7 +81,7 @@ export default function InvitePage() {
 
   if (error || !inviteInfo) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-kraft-offwhite">
         <LanguageSwitcher />
         <div className="max-w-lg mx-auto px-4 py-16 text-center">
           <div className="bg-white rounded-2xl p-8 shadow-sm">
@@ -95,7 +95,7 @@ export default function InvitePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       <div className="max-w-lg mx-auto px-4 py-16 text-center">

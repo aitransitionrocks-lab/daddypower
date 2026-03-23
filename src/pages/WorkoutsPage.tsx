@@ -91,14 +91,14 @@ export default function WorkoutsPage() {
   const filterDifficultyLabel = lang === 'de' ? 'Schwierigkeit' : 'Difficulty'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Header */}
       <header className="bg-kraft-dark text-white px-6 py-8">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-2xl md:text-3xl font-bold">{pageTitle}</h1>
-          <p className="text-gray-400 mt-1">{pageSubtitle}</p>
+          <p className="text-kraft-muted mt-1">{pageSubtitle}</p>
         </div>
       </header>
 
@@ -114,7 +114,7 @@ export default function WorkoutsPage() {
               <select
                 value={filterType}
                 onChange={(e) => setFilterType(e.target.value as WorkoutType | '')}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
+                className="w-full border border-kraft-border rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
               >
                 <option value="">{allLabel}</option>
                 {workoutTypes.map((type) => (
@@ -133,7 +133,7 @@ export default function WorkoutsPage() {
               <select
                 value={filterDuration}
                 onChange={(e) => setFilterDuration(e.target.value ? Number(e.target.value) as Duration : '')}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
+                className="w-full border border-kraft-border rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
               >
                 <option value="">{allLabel}</option>
                 {durations.map((d) => (
@@ -152,7 +152,7 @@ export default function WorkoutsPage() {
               <select
                 value={filterDifficulty}
                 onChange={(e) => setFilterDifficulty(e.target.value as Difficulty | '')}
-                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
+                className="w-full border border-kraft-border rounded-lg px-3 py-2 text-sm text-kraft-dark bg-white focus:outline-none focus:ring-2 focus:ring-kraft-accent/30"
               >
                 <option value="">{allLabel}</option>
                 {difficulties.map((d) => (
@@ -174,7 +174,7 @@ export default function WorkoutsPage() {
 
         {/* Error */}
         {error && !loading && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-800 text-sm mb-6">
+          <div className="bg-kraft-accent-light border border-kraft-accent rounded-xl p-4 text-kraft-accent-dark text-sm mb-6">
             {error}
           </div>
         )}

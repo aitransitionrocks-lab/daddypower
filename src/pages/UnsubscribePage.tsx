@@ -25,7 +25,7 @@ export default function UnsubscribePage() {
 
   if (status === 'done') {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-6">
+      <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center px-6">
         <div className="max-w-sm text-center">
           <h1 className="text-2xl font-bold text-kraft-dark mb-4">Abgemeldet</h1>
           <p className="text-kraft-muted">
@@ -37,7 +37,7 @@ export default function UnsubscribePage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-6">
+    <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center px-6">
       <div className="max-w-sm text-center">
         <h1 className="text-2xl font-bold text-kraft-dark mb-4">E-Mails abbestellen</h1>
         <p className="text-kraft-muted mb-6">
@@ -58,7 +58,7 @@ export default function UnsubscribePage() {
           </a>
         </div>
         {status === 'error' && (
-          <p className="text-red-500 text-sm mt-4">Ein Fehler ist aufgetreten.</p>
+          <p className="text-kraft-accent text-sm mt-4">Ein Fehler ist aufgetreten.</p>
         )}
       </div>
     </div>

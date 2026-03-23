@@ -150,14 +150,14 @@ export default function CheckInPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center">
         <div className="animate-pulse text-kraft-muted">...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       <div className="max-w-lg mx-auto px-4 py-8">
@@ -267,7 +267,7 @@ export default function CheckInPage() {
                 value={sleepHours}
                 onChange={(e) => setSleepHours(e.target.value)}
                 placeholder={t.checkIn.sleepPlaceholder}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-kraft-dark focus:outline-none focus:ring-2 focus:ring-kraft-accent/50"
+                className="w-full border border-kraft-border rounded-xl px-4 py-3 text-kraft-dark focus:outline-none focus:ring-2 focus:ring-kraft-accent/50"
               />
             </div>
 
@@ -311,12 +311,12 @@ export default function CheckInPage() {
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder={t.checkIn.notesPlaceholder}
                 rows={3}
-                className="w-full border border-gray-200 rounded-xl px-4 py-3 text-kraft-dark focus:outline-none focus:ring-2 focus:ring-kraft-accent/50 resize-none"
+                className="w-full border border-kraft-border rounded-xl px-4 py-3 text-kraft-dark focus:outline-none focus:ring-2 focus:ring-kraft-accent/50 resize-none"
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+              <div className="bg-kraft-accent-light border border-kraft-accent rounded-xl p-4">
                 <p className="text-red-800 text-sm">{error}</p>
               </div>
             )}

@@ -60,7 +60,7 @@ export default function ChallengesPage() {
   }, [user])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Header */}
@@ -68,13 +68,13 @@ export default function ChallengesPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold">daddypower</h1>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-kraft-muted">
               {lang === 'de' ? 'Challenges' : 'Challenges'}
             </p>
           </div>
           <button
             onClick={() => navigate('/dashboard')}
-            className="text-sm text-gray-300 hover:text-white underline cursor-pointer"
+            className="text-sm text-kraft-border hover:text-white underline cursor-pointer"
           >
             {lang === 'de' ? 'Dashboard' : 'Dashboard'}
           </button>

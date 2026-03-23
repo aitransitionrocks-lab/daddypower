@@ -161,7 +161,7 @@ export default function ChallengeDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-kraft-offwhite flex items-center justify-center">
         <div className="w-8 h-8 border-4 border-kraft-accent border-t-transparent rounded-full animate-spin" />
       </div>
     )
@@ -169,7 +169,7 @@ export default function ChallengeDetailPage() {
 
   if (!challenge) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-kraft-offwhite">
         <LanguageSwitcher />
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           <p className="text-gray-500 mb-4">
@@ -187,7 +187,7 @@ export default function ChallengeDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Header */}
@@ -195,11 +195,11 @@ export default function ChallengeDetailPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div>
             <h1 className="text-xl font-bold">daddypower</h1>
-            <p className="text-sm text-gray-400">{title}</p>
+            <p className="text-sm text-kraft-muted">{title}</p>
           </div>
           <button
             onClick={() => navigate('/challenges')}
-            className="text-sm text-gray-300 hover:text-white underline cursor-pointer"
+            className="text-sm text-kraft-border hover:text-white underline cursor-pointer"
           >
             {lang === 'de' ? 'Alle Challenges' : 'All Challenges'}
           </button>
@@ -244,7 +244,7 @@ export default function ChallengeDetailPage() {
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
-              <p className="text-xs text-gray-400 mt-1">
+              <p className="text-xs text-kraft-muted mt-1">
                 {progress?.completed_days?.length || 0} / {challenge.duration_days}{' '}
                 {lang === 'de' ? 'Tage abgeschlossen' : 'days completed'}
               </p>
