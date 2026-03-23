@@ -195,7 +195,7 @@ export default function ResultPage() {
               ))}
             </ul>
           </div>
-          <div className="bg-red-50 rounded-xl p-5">
+          <div className="bg-kraft-accent-light rounded-xl p-5">
             <h3 className="font-bold text-kraft-dark mb-3">{t.results.risksTitle}</h3>
             <ul className="space-y-2">
               {resultText.risks.map((r, i) => (
@@ -215,7 +215,7 @@ export default function ResultPage() {
           <p className="text-lg leading-relaxed mb-6">{resultText.nextStep}</p>
           <button
             onClick={scrollToForm}
-            className="bg-kraft-accent hover:bg-red-600 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+            className="bg-kraft-accent hover:bg-amber-700 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
             {t.results.ctaCommunity}
           </button>
@@ -276,7 +276,7 @@ export default function ResultPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-kraft-accent hover:bg-red-600 disabled:bg-gray-300 text-white font-semibold text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+            className="w-full bg-kraft-accent hover:bg-amber-700 disabled:bg-gray-300 text-white font-semibold text-lg py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
             {isSubmitting ? t.results.submitting : t.results.submit}
           </button>

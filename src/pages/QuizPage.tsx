@@ -46,7 +46,7 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-kraft-offwhite flex flex-col">
       <LanguageSwitcher />
 
       {/* Progress Bar */}
@@ -82,8 +82,8 @@ export default function QuizPage() {
                 onClick={() => selectAnswer(option.id)}
                 className={`w-full text-left px-5 py-4 rounded-xl border-2 transition-all cursor-pointer ${
                   isSelected
-                    ? 'border-kraft-accent bg-red-50 text-kraft-dark'
-                    : 'border-gray-200 hover:border-kraft-accent/50 text-kraft-dark'
+                    ? 'border-kraft-accent bg-kraft-accent-light text-kraft-dark'
+                    : 'border-kraft-border hover:border-kraft-accent/50 text-kraft-dark'
                 }`}
               >
                 {option.text}

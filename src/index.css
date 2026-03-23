@@ -1,14 +1,30 @@
 @import "tailwindcss";
 
+/* DaddyPower Brand Guide v1.0 — Farbpalette */
 @theme {
-  --color-kraft-dark: #1a1a2e;
-  --color-kraft-navy: #16213e;
-  --color-kraft-blue: #0f3460;
-  --color-kraft-accent: #e94560;
-  --color-kraft-warm: #f5a623;
-  --color-kraft-light: #f8f9fa;
-  --color-kraft-muted: #6c757d;
-  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  /* Amber — Primärakzent (CTAs, Highlights, Logo) */
+  --color-kraft-accent: #BA7517;
+  --color-kraft-accent-light: #FAEEDA;
+  --color-kraft-accent-dark: #633806;
+
+  /* Charcoal — Primärtext, Headlines, Logo "DADDY" */
+  --color-kraft-dark: #1B1B19;
+
+  /* Offwhite — Seitenhintergrund */
+  --color-kraft-offwhite: #F5F3ED;
+
+  /* Warm Gray — Sekundärtext, Borders */
+  --color-kraft-muted: #5F5E5A;
+  --color-kraft-border: #B4B2A9;
+
+  /* Legacy-Aliases (für bestehende Klassen) */
+  --color-kraft-navy: #1B1B19;
+  --color-kraft-blue: #1B1B19;
+  --color-kraft-warm: #BA7517;
+  --color-kraft-light: #F5F3ED;
+
+  /* Typografie: Inter / Arial */
+  --font-family-sans: 'Inter', Arial, system-ui, -apple-system, sans-serif;
 }
 
 html {
@@ -18,5 +34,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-family-sans);
+  background-color: #F5F3ED;
+  color: #1B1B19;
   -webkit-font-smoothing: antialiased;
 }

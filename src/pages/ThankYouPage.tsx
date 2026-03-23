@@ -33,7 +33,7 @@ export default function ThankYouPage() {
     : t.welcome.title
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-center">
+    <div className="min-h-screen bg-kraft-offwhite flex flex-col justify-center">
       <LanguageSwitcher />
 
       <div className="px-6 py-12 max-w-lg mx-auto w-full text-center">
@@ -44,7 +44,7 @@ export default function ThankYouPage() {
         <p className="text-lg text-kraft-muted mb-8">{t.welcome.subtitle}</p>
 
         {resultLabel && (
-          <div className="bg-gray-50 rounded-xl p-5 mb-8">
+          <div className="bg-kraft-offwhite rounded-xl p-5 mb-8">
             <p className="text-sm text-kraft-muted mb-1">{t.welcome.energyType}</p>
             <p className="text-xl font-bold text-kraft-dark">{resultLabel}</p>
           </div>
@@ -53,7 +53,7 @@ export default function ThankYouPage() {
         {/* WhatsApp CTA */}
         <div className="bg-kraft-dark text-white rounded-2xl p-6 md:p-8 mb-8">
           <h2 className="text-xl font-bold mb-3">{t.welcome.whatsappTitle}</h2>
-          <p className="text-gray-300 mb-6">{t.welcome.whatsappText}</p>
+          <p className="text-kraft-border mb-6">{t.welcome.whatsappText}</p>
           <a
             href={WHATSAPP_GROUP_LINK}
             target="_blank"
@@ -69,7 +69,7 @@ export default function ThankYouPage() {
         </div>
 
         {/* Steps */}
-        <div className="text-left bg-gray-50 rounded-2xl p-6">
+        <div className="text-left bg-kraft-offwhite rounded-2xl p-6">
           <h3 className="font-bold text-kraft-dark mb-3 text-center">{t.welcome.stepsTitle}</h3>
           <ul className="space-y-3 text-kraft-dark">
             {t.welcome.steps.map((step, i) => (

@@ -4,8 +4,8 @@
   "description": "Mehr Energie für Väter",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1a1a2e",
+  "background_color": "#F5F3ED",
+  "theme_color": "#1B1B19",
   "orientation": "portrait",
   "icons": [
     {

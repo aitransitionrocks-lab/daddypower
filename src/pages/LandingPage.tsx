@@ -19,7 +19,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-kraft-offwhite">
       <LanguageSwitcher />
 
       {/* Hero */}
@@ -37,14 +37,14 @@ export default function LandingPage() {
         </p>
         <button
           onClick={startQuiz}
-          className="bg-kraft-accent hover:bg-red-600 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+          className="bg-kraft-accent hover:bg-amber-700 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
         >
           {l.ctaPrimary}
         </button>
       </section>
 
       {/* Problem Mirroring */}
-      <section className="bg-gray-50 px-6 py-12 md:py-16">
+      <section className="bg-kraft-offwhite px-6 py-12 md:py-16">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl md:text-3xl font-bold text-kraft-dark text-center mb-10">
             {l.problemTitle}
@@ -78,7 +78,7 @@ export default function LandingPage() {
       <section className="bg-kraft-dark text-white px-6 py-12 md:py-16">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">{l.trustTitle}</h2>
-          <p className="text-gray-300 text-lg mb-4">{l.trustText}</p>
+          <p className="text-kraft-border text-lg mb-4">{l.trustText}</p>
           <p className="text-kraft-warm font-semibold text-lg">{l.trustHighlight}</p>
         </div>
       </section>
@@ -93,7 +93,7 @@ export default function LandingPage() {
           <p className="text-kraft-muted mb-8">{l.quizIntroText}</p>
           <button
             onClick={startQuiz}
-            className="bg-kraft-accent hover:bg-red-600 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
+            className="bg-kraft-accent hover:bg-amber-700 text-white font-semibold text-lg px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
             {l.ctaSecondary}
           </button>
@@ -102,7 +102,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 py-8 border-t border-gray-100 text-center">
+      <footer className="px-6 py-8 border-t border-kraft-border/50 text-center">
         <p className="text-sm text-kraft-muted">{t.footer}</p>
       </footer>
     </div>

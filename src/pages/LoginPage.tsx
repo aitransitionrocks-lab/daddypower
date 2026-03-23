@@ -120,7 +120,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-kraft-accent hover:bg-red-600 disabled:bg-gray-300 text-white font-semibold py-3 rounded-xl transition-all cursor-pointer"
+            className="w-full bg-kraft-accent hover:bg-amber-700 disabled:bg-gray-300 text-white font-semibold py-3 rounded-xl transition-all cursor-pointer"
           >
             {loading
               ? 'Bitte warten...'
