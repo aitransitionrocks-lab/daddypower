@@ -23,6 +23,10 @@ const CheckInPage = lazy(() => import('./pages/CheckInPage'))
 const ChallengesPage = lazy(() => import('./pages/ChallengesPage'))
 const ChallengeDetailPage = lazy(() => import('./pages/ChallengeDetailPage'))
 const PartnerDashboardPage = lazy(() => import('./pages/PartnerDashboardPage'))
+const PartnerChallengesPage = lazy(() => import('./pages/PartnerChallengesPage'))
+const PartnerChallengeNewPage = lazy(() => import('./pages/PartnerChallengeNewPage'))
+const PartnerChallengeStatsPage = lazy(() => import('./pages/PartnerChallengeStatsPage'))
+const AdminPartnersPage = lazy(() => import('./pages/AdminPartnersPage'))
 
 function Loading() {
   return (
@@ -57,6 +61,9 @@ export default function App() {
 
             {/* Protected: Partner */}
             <Route path="/partner" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerDashboardPage /></PrivateRoute>} />
+            <Route path="/partner/challenges" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengesPage /></PrivateRoute>} />
+            <Route path="/partner/challenges/new" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengeNewPage /></PrivateRoute>} />
+            <Route path="/partner/challenges/:id/stats" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengeStatsPage /></PrivateRoute>} />
 
             {/* Protected: Admin */}
             <Route path="/admin" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminPage /></PrivateRoute>} />
@@ -64,6 +71,7 @@ export default function App() {
             <Route path="/admin/email-stats" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminEmailStatsPage /></PrivateRoute>} />
             <Route path="/admin/funnel" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminFunnelPage /></PrivateRoute>} />
             <Route path="/admin/workouts/new" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminWorkoutCreatorPage /></PrivateRoute>} />
+            <Route path="/admin/partners" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminPartnersPage /></PrivateRoute>} />
           </Routes>
         </Suspense>
       </BrowserRouter>

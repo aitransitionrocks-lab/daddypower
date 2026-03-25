@@ -182,6 +182,61 @@ export interface Translations {
     back: string
   }
 
+  // Partner Challenges
+  partnerChallenges: {
+    pageTitle: string
+    pageSubtitle: string
+    newChallenge: string
+    newChallengeTitle: string
+    newChallengeSubtitle: string
+    statusWaiting: string
+    statusActive: string
+    statusPaused: string
+    enrollments: string
+    editButton: string
+    statsButton: string
+    deleteButton: string
+    deleteConfirm: string
+    noChallenges: string
+    formTitleDe: string
+    formTitleEn: string
+    formDescriptionDe: string
+    formDuration: string
+    formDifficulty: string
+    formTargetTypes: string
+    formVisibility: string
+    visibilityDirect: string
+    visibilityDownline: string
+    durationDays: string
+    difficultyEasy: string
+    difficultyMedium: string
+    difficultyHard: string
+    dayModuleTitle: string
+    dayTitle: string
+    dayTaskDescription: string
+    dayRestToggle: string
+    dayWorkoutSelect: string
+    dayWorkoutNone: string
+    saveChallenge: string
+    saving: string
+    savedSuccess: string
+    errorMinDays: string
+    errorDayTitle: string
+    errorTitleLength: string
+    errorTitleRequired: string
+    errorGeneric: string
+    statsTitle: string
+    statsEnrollments: string
+    statsAvgProgress: string
+    statsCompletionRate: string
+    statsDropouts: string
+    backToList: string
+    targetLeererAkku: string
+    targetFunktionierer: string
+    targetStillerKaempfer: string
+    targetPerformerAufReserve: string
+  }
+
   // Admin
   admin: {
     loginTitle: string
