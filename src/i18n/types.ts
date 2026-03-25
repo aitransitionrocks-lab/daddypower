@@ -237,6 +237,58 @@ export interface Translations {
     targetPerformerAufReserve: string
   }
 
+  // Network
+  network: {
+    pageTitle: string
+    backToPartner: string
+    statTotal: string
+    statActive: string
+    statDirect: string
+    statNewThisWeek: string
+    maxDepthWarning: string
+    emptyTree: string
+    levelLabel: string
+    statusActive: string
+    statusSuspended: string
+    statusPending: string
+    showNetwork: string
+  }
+
+  // Token Manager
+  tokenManager: {
+    title: string
+    createTitle: string
+    labelField: string
+    labelPlaceholder: string
+    maxUsesField: string
+    maxUsesPlaceholder: string
+    expiryField: string
+    createButton: string
+    noTokens: string
+    copyLink: string
+    copied: string
+    deactivate: string
+    deleteToken: string
+    usesLabel: string
+    expiresLabel: string
+    statusActive: string
+    statusInactive: string
+    statusExpired: string
+    statusMaxUsed: string
+    whatsappText: string
+    errorGeneric: string
+  }
+
+  // License
+  license: {
+    title: string
+    currentTier: string
+    freeTier: string
+    activeDownline: string
+    progressText: string
+    manageSubscription: string
+  }
+
   // Admin
   admin: {
     loginTitle: string

@@ -26,6 +26,7 @@ const PartnerDashboardPage = lazy(() => import('./pages/PartnerDashboardPage'))
 const PartnerChallengesPage = lazy(() => import('./pages/PartnerChallengesPage'))
 const PartnerChallengeNewPage = lazy(() => import('./pages/PartnerChallengeNewPage'))
 const PartnerChallengeStatsPage = lazy(() => import('./pages/PartnerChallengeStatsPage'))
+const PartnerNetworkPage = lazy(() => import('./pages/PartnerNetworkPage'))
 const AdminPartnersPage = lazy(() => import('./pages/AdminPartnersPage'))
 
 function Loading() {
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="/partner/challenges" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengesPage /></PrivateRoute>} />
             <Route path="/partner/challenges/new" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengeNewPage /></PrivateRoute>} />
             <Route path="/partner/challenges/:id/stats" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerChallengeStatsPage /></PrivateRoute>} />
+            <Route path="/partner/network" element={<PrivateRoute requiredRoles={['partner', 'super_admin', 'operator']}><PartnerNetworkPage /></PrivateRoute>} />
 
             {/* Protected: Admin */}
             <Route path="/admin" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminPage /></PrivateRoute>} />
