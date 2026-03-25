@@ -2,18 +2,23 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import { useI18n } from '../i18n'
 import type { ResultTypeId } from '../data/quiz'
+import AdminLeadsPage from './AdminLeadsPage'
+import AdminEmailStatsPage from './AdminEmailStatsPage'
+import AdminFunnelPage from './AdminFunnelPage'
 
 const RESULT_TYPES: ResultTypeId[] = ['leerer_akku', 'funktionierer', 'stiller_kaempfer', 'performer_auf_reserve']
 const LANGUAGES = ['de', 'en'] as const
 
-interface Lead {
-  id: string
-  email: string
-  first_name: string | null
-  result_type: string | null
-  biggest_challenge: string | null
-  created_at: string
-}
+type TabId = 'kpis' | 'leads' | 'videos' | 'email' | 'funnel' | 'partners'
+
+const TABS: { id: TabId; label: string }[] = [
+  { id: 'kpis', label: 'KPIs' },
+  { id: 'leads', label: 'Leads CRM' },
+  { id: 'videos', label: 'Videos' },
+  { id: 'email', label: 'E-Mail Stats' },
+  { id: 'funnel', label: 'Funnel' },
+  { id: 'partners', label: 'Partner' },
+]
 
 interface KPIs {
   leadsTotal: number
@@ -37,10 +42,8 @@ export default function AdminPage() {
 
   // Dashboard State
   const [kpis, setKpis] = useState<KPIs>({ leadsTotal: 0, leadsToday: 0, quizCompleted: 0, conversion: 0 })
-  const [leads, setLeads] = useState<Lead[]>([])
-  const [filterType, setFilterType] = useState<string>('')
   const [videos, setVideos] = useState<ResultVideo[]>([])
-  const [activeTab, setActiveTab] = useState<'kpis' | 'leads' | 'videos'>('kpis')
+  const [activeTab, setActiveTab] = useState<TabId>('kpis')
 
   // Video Upload State
   const [uploadType, setUploadType] = useState<ResultTypeId>('leerer_akku')
@@ -55,22 +58,22 @@ export default function AdminPage() {
     window.location.href = '/login'
   }
 
-  // Load Dashboard Data
+  // Load Dashboard Data (KPIs + Videos only — leads moved to AdminLeadsPage)
   const loadData = useCallback(async () => {
     // KPIs
     const { count: totalLeads } = await supabase
       .from('leads')
-      .select('*', { count: 'exact', head: true })
+      .select('id', { count: 'exact', head: true })
 
     const today = new Date().toISOString().split('T')[0]
     const { count: todayLeads } = await supabase
       .from('leads')
-      .select('*', { count: 'exact', head: true })
+      .select('id', { count: 'exact', head: true })
       .gte('created_at', today)
 
     const { count: quizEvents } = await supabase
       .from('events')
-      .select('*', { count: 'exact', head: true })
+      .select('id', { count: 'exact', head: true })
       .eq('event_name', 'quiz_completed')
 
     const total = totalLeads || 0
@@ -84,28 +87,14 @@ export default function AdminPage() {
       conversion,
     })
 
-    // Leads
-    let query = supabase
-      .from('leads')
-      .select('id, email, first_name, result_type, biggest_challenge, created_at')
-      .order('created_at', { ascending: false })
-      .limit(100)
-
-    if (filterType) {
-      query = query.eq('result_type', filterType)
-    }
-
-    const { data: leadsData } = await query
-    setLeads(leadsData || [])
-
     // Videos
     const { data: videosData } = await supabase
       .from('content_assets')
-      .select('*')
+      .select('id, result_type, language, url, asset_type, is_public')
       .order('result_type')
 
     setVideos(videosData || [])
-  }, [filterType])
+  }, [])
 
   useEffect(() => {
     loadData()
@@ -138,7 +127,6 @@ export default function AdminPage() {
 
       if (!videoUrl) return
 
-      // Existierendes Video löschen falls vorhanden, dann neu einfügen
       await supabase
         .from('content_assets')
         .delete()
@@ -175,7 +163,6 @@ export default function AdminPage() {
     await loadData()
   }
 
-  // ---- DASHBOARD ----
   return (
     <div className="min-h-screen bg-kraft-offwhite">
       {/* Header */}
@@ -191,18 +178,18 @@ export default function AdminPage() {
 
       {/* Tabs */}
       <div className="px-6 pt-6 max-w-6xl mx-auto">
-        <div className="flex gap-2 mb-6">
-          {(['kpis', 'leads', 'videos'] as const).map((tab) => (
+        <div className="flex gap-2 mb-6 flex-wrap">
+          {TABS.map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2 rounded-lg font-medium text-sm cursor-pointer transition-all ${
-                activeTab === tab
+                activeTab === tab.id
                   ? 'bg-kraft-dark text-white'
                   : 'bg-white text-kraft-dark border border-kraft-border hover:bg-kraft-offwhite'
               }`}
             >
-              {tab === 'kpis' ? 'KPIs' : tab === 'leads' ? a.leadsTable : a.videoManagement}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -224,67 +211,8 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* Leads Tab */}
-        {activeTab === 'leads' && (
-          <div>
-            <div className="mb-4">
-              <select
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-                className="px-3 py-2 border border-kraft-border rounded-lg text-sm"
-              >
-                <option value="">{a.allTypes}</option>
-                {RESULT_TYPES.map((type) => (
-                  <option key={type} value={type}>
-                    {t.results.types[type].title}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="bg-white rounded-xl shadow-sm overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead className="bg-kraft-offwhite">
-                  <tr>
-                    <th className="text-left px-4 py-3 font-medium text-kraft-muted">Datum</th>
-                    <th className="text-left px-4 py-3 font-medium text-kraft-muted">{a.email}</th>
-                    <th className="text-left px-4 py-3 font-medium text-kraft-muted">Name</th>
-                    <th className="text-left px-4 py-3 font-medium text-kraft-muted">Typ</th>
-                    <th className="text-left px-4 py-3 font-medium text-kraft-muted">Challenge</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {leads.map((lead) => (
-                    <tr key={lead.id} className="border-t border-kraft-border/50">
-                      <td className="px-4 py-3 text-kraft-muted">
-                        {new Date(lead.created_at).toLocaleDateString('de-DE')}
-                      </td>
-                      <td className="px-4 py-3 text-kraft-dark">{lead.email}</td>
-                      <td className="px-4 py-3 text-kraft-dark">{lead.first_name || '–'}</td>
-                      <td className="px-4 py-3">
-                        {lead.result_type ? (
-                          <span className="bg-kraft-accent/10 text-kraft-accent text-xs px-2 py-1 rounded-full">
-                            {t.results.types[lead.result_type]?.title || lead.result_type}
-                          </span>
-                        ) : '–'}
-                      </td>
-                      <td className="px-4 py-3 text-kraft-muted text-xs max-w-[200px] truncate">
-                        {lead.biggest_challenge || '–'}
-                      </td>
-                    </tr>
-                  ))}
-                  {leads.length === 0 && (
-                    <tr>
-                      <td colSpan={5} className="px-4 py-8 text-center text-kraft-muted">
-                        Keine Leads gefunden.
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        )}
+        {/* Leads CRM Tab */}
+        {activeTab === 'leads' && <AdminLeadsPage />}
 
         {/* Videos Tab */}
         {activeTab === 'videos' && (
@@ -408,6 +336,20 @@ export default function AdminPage() {
                 </button>
               </form>
             </div>
+          </div>
+        )}
+
+        {/* Email Stats Tab */}
+        {activeTab === 'email' && <AdminEmailStatsPage />}
+
+        {/* Funnel Tab */}
+        {activeTab === 'funnel' && <AdminFunnelPage />}
+
+        {/* Partners Tab (Placeholder) */}
+        {activeTab === 'partners' && (
+          <div className="bg-white rounded-xl shadow-sm p-8 text-center">
+            <p className="text-kraft-muted text-lg">Partner-Verwaltung kommt bald.</p>
+            <p className="text-kraft-muted text-sm mt-2">Hier werden Partner-Netzwerk, Lizenzen und Abrechnungen verwaltet.</p>
           </div>
         )}
       </div>

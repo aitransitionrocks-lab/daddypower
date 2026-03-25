@@ -1,22 +1,16 @@
 {
-  "name": "daddypower",
-  "short_name": "daddypower",
-  "description": "Mehr Energie für Väter",
+  "name": "DaddyPower",
+  "short_name": "DaddyPower",
+  "description": "Energie zurück für Väter",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#F5F3ED",
-  "theme_color": "#1B1B19",
+  "theme_color": "#BA7517",
   "orientation": "portrait",
   "icons": [
-    {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "categories": ["health", "fitness", "lifestyle"],
+  "lang": "de"
 }

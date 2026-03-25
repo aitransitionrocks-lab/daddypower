@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaddyPower — Offline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #F5F3ED;
+      color: #1B1B19;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      text-align: center;
+    }
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: #BA7517;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .logo svg { width: 40px; height: 40px; }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #BA7517;
+      margin-bottom: 0.75rem;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 400px;
+      color: #3A3A38;
+    }
+    button {
+      margin-top: 2rem;
+      background: #BA7517;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover { background: #9A6013; }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="108,36 72,108 96,108 84,156 120,84 96,84" fill="#FFFFFF"/>
+    </svg>
+  </div>
+  <h1>Du bist offline</h1>
+  <p>Bitte prüfe deine Internetverbindung und versuche es erneut.</p>
+  <button onclick="location.reload()">Erneut versuchen</button>
+</body>
+</html>

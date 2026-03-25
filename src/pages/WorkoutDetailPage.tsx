@@ -5,12 +5,23 @@ import { useI18n } from '../i18n'
 import { supabase } from '../lib/supabase'
 import { trackEvent } from '../lib/tracking'
 import LanguageSwitcher from '../components/LanguageSwitcher'
+import WorkoutExerciseList, { type ExerciseData } from '../components/workouts/WorkoutExerciseList'
 
-interface Exercise {
+interface ExerciseLegacy {
   name: string
   sets: number
   reps: number
   rest_seconds: number
+}
+
+interface ExerciseDataRaw {
+  wger_id?: number
+  name: string
+  muscles?: string[]
+  sets: number
+  reps: number
+  rest_seconds: number
+  image_url?: string
 }
 
 interface ContentAsset {
@@ -29,7 +40,8 @@ interface WorkoutDetail {
   difficulty: 'easy' | 'medium' | 'hard'
   workout_type: 'hiit' | 'kraft' | 'mobility'
   equipment: string[]
-  exercises: Exercise[]
+  exercises: ExerciseLegacy[]
+  exercises_data: ExerciseDataRaw[] | null
   video_asset_id: string | null
 }
 
@@ -61,6 +73,7 @@ export default function WorkoutDetailPage() {
   const [videoAsset, setVideoAsset] = useState<ContentAsset | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [started, setStarted] = useState(false)
   const [completing, setCompleting] = useState(false)
   const [completed, setCompleted] = useState(false)
 
@@ -71,7 +84,7 @@ export default function WorkoutDetailPage() {
       setLoading(true)
       const { data, error: fetchError } = await supabase
         .from('workouts')
-        .select('id, title_de, title_en, description_de, description_en, duration_minutes, difficulty, workout_type, equipment, exercises, video_asset_id')
+        .select('id, title_de, title_en, description_de, description_en, duration_minutes, difficulty, workout_type, equipment, exercises, exercises_data, video_asset_id')
         .eq('id', id)
         .single()
 
@@ -83,8 +96,6 @@ export default function WorkoutDetailPage() {
 
       const workoutData = data as WorkoutDetail
       setWorkout(workoutData)
-
-      trackEvent('workout_started', { workout_id: id })
 
       // Fetch video asset if linked
       if (workoutData.video_asset_id) {
@@ -104,6 +115,11 @@ export default function WorkoutDetailPage() {
 
     fetchWorkout()
   }, [id, lang])
+
+  const handleStart = () => {
+    setStarted(true)
+    trackEvent('workout_started', { workout_id: id })
+  }
 
   const handleComplete = async () => {
     if (!user || !workout || completing) return
@@ -127,6 +143,30 @@ export default function WorkoutDetailPage() {
     setCompleting(false)
   }
 
+  // Build exercise list from exercises_data (preferred) or legacy exercises
+  const exerciseList: ExerciseData[] = (() => {
+    if (workout?.exercises_data && Array.isArray(workout.exercises_data) && workout.exercises_data.length > 0) {
+      return workout.exercises_data.map((ex) => ({
+        wger_id: ex.wger_id,
+        name: ex.name,
+        muscles: ex.muscles,
+        sets: ex.sets,
+        reps: ex.reps,
+        rest_seconds: ex.rest_seconds,
+        image_url: ex.image_url,
+      }))
+    }
+    if (workout?.exercises && Array.isArray(workout.exercises)) {
+      return workout.exercises.map((ex) => ({
+        name: ex.name,
+        sets: ex.sets,
+        reps: ex.reps,
+        rest_seconds: ex.rest_seconds,
+      }))
+    }
+    return []
+  })()
+
   const title = workout ? (lang === 'de' ? workout.title_de : workout.title_en) : ''
   const description = workout
     ? (lang === 'de' ? workout.description_de : workout.description_en)
@@ -134,11 +174,8 @@ export default function WorkoutDetailPage() {
 
   const backLabel = lang === 'de' ? 'Zurück zur Bibliothek' : 'Back to Library'
   const equipmentLabel = lang === 'de' ? 'Equipment' : 'Equipment'
-  const exercisesLabel = lang === 'de' ? 'Übungen' : 'Exercises'
-  const setsLabel = lang === 'de' ? 'Sätze' : 'Sets'
-  const repsLabel = lang === 'de' ? 'Wdh.' : 'Reps'
-  const restLabel = lang === 'de' ? 'Pause' : 'Rest'
-  const completeLabel = lang === 'de' ? 'Workout abgeschlossen' : 'Workout Completed'
+  const startLabel = lang === 'de' ? 'Workout starten' : 'Start Workout'
+  const completeLabel = lang === 'de' ? 'Workout abschließen' : 'Complete Workout'
   const completingLabel = lang === 'de' ? 'Wird gespeichert...' : 'Saving...'
   const completedLabel = lang === 'de' ? 'Erledigt!' : 'Done!'
   const errorLabel = lang === 'de' ? 'Fehler beim Laden.' : 'Failed to load.'
@@ -242,47 +279,57 @@ export default function WorkoutDetailPage() {
           </div>
         )}
 
-        {/* Exercises */}
-        {workout.exercises && workout.exercises.length > 0 && (
-          <div className="bg-white rounded-2xl shadow-sm p-6">
-            <h2 className="text-lg font-bold text-kraft-dark mb-4">{exercisesLabel}</h2>
-            <div className="space-y-3">
-              {workout.exercises.map((exercise, index) => (
-                <div
-                  key={index}
-                  className="flex items-center justify-between border border-kraft-border/50 rounded-xl p-4"
-                >
-                  <div>
-                    <p className="font-semibold text-kraft-dark">{exercise.name}</p>
-                    <p className="text-sm text-kraft-muted mt-0.5">
-                      {exercise.sets} {setsLabel} &middot; {exercise.reps} {repsLabel} &middot; {exercise.rest_seconds}s {restLabel}
-                    </p>
-                  </div>
-                  <span className="text-kraft-muted text-sm font-mono">
-                    #{index + 1}
-                  </span>
-                </div>
-              ))}
-            </div>
+        {/* Start Workout / Exercises */}
+        {!started && exerciseList.length > 0 ? (
+          <div className="pt-4">
+            <button
+              onClick={handleStart}
+              className="w-full bg-kraft-accent text-white font-bold text-lg py-4 rounded-2xl hover:bg-kraft-accent/90 transition-colors cursor-pointer"
+            >
+              {startLabel}
+            </button>
+          </div>
+        ) : exerciseList.length > 0 ? (
+          <WorkoutExerciseList exercises={exerciseList} />
+        ) : null}
+
+        {/* Complete button */}
+        {started && (
+          <div className="pt-4 pb-8">
+            {completed ? (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                <p className="text-green-800 font-semibold text-lg">{completedLabel}</p>
+              </div>
+            ) : (
+              <button
+                onClick={handleComplete}
+                disabled={completing}
+                className="w-full bg-kraft-dark text-white font-bold text-lg py-4 rounded-2xl hover:bg-kraft-dark/90 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {completing ? completingLabel : completeLabel}
+              </button>
+            )}
           </div>
         )}
 
-        {/* Complete button */}
-        <div className="pt-4 pb-8">
-          {completed ? (
-            <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
-              <p className="text-green-800 font-semibold text-lg">{completedLabel}</p>
-            </div>
-          ) : (
-            <button
-              onClick={handleComplete}
-              disabled={completing}
-              className="w-full bg-kraft-accent text-white font-bold text-lg py-4 rounded-2xl hover:bg-kraft-accent/90 transition-colors disabled:opacity-50 cursor-pointer"
-            >
-              {completing ? completingLabel : completeLabel}
-            </button>
-          )}
-        </div>
+        {/* If not started and no exercises, show complete directly */}
+        {!started && exerciseList.length === 0 && (
+          <div className="pt-4 pb-8">
+            {completed ? (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-center">
+                <p className="text-green-800 font-semibold text-lg">{completedLabel}</p>
+              </div>
+            ) : (
+              <button
+                onClick={handleComplete}
+                disabled={completing}
+                className="w-full bg-kraft-accent text-white font-bold text-lg py-4 rounded-2xl hover:bg-kraft-accent/90 transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                {completing ? completingLabel : completeLabel}
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   )

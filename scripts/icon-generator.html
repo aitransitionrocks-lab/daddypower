@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaddyPower PWA Icon Generator</title>
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; background: #F5F3ED; color: #1B1B19; display: flex; flex-direction: column; align-items: center; padding: 2rem; }
+    h1 { color: #BA7517; }
+    .previews { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin: 2rem 0; }
+    .preview { text-align: center; }
+    canvas { border: 1px solid #ccc; border-radius: 8px; }
+    button { background: #BA7517; color: #fff; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; }
+    button:hover { background: #9A6013; }
+  </style>
+</head>
+<body>
+  <h1>DaddyPower — PWA Icon Generator</h1>
+  <p>Klicke auf die Buttons, um die Icons als PNG herunterzuladen.</p>
+  <div class="previews">
+    <div class="preview">
+      <canvas id="c192" width="192" height="192"></canvas>
+      <br>
+      <button onclick="download('c192', 'icon-192.png')">icon-192.png herunterladen</button>
+    </div>
+    <div class="preview">
+      <canvas id="c512" width="512" height="512"></canvas>
+      <br>
+      <button onclick="download('c512', 'icon-512.png')">icon-512.png herunterladen</button>
+    </div>
+  </div>
+  <script>
+    function drawIcon(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      const r = size / 2;
+
+      // Amber circle
+      ctx.beginPath();
+      ctx.arc(r, r, r, 0, Math.PI * 2);
+      ctx.fillStyle = '#BA7517';
+      ctx.fill();
+
+      // White lightning bolt
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      const s = size / 192; // scale factor based on 192 reference
+      ctx.moveTo(108 * s, 36 * s);
+      ctx.lineTo(72 * s, 108 * s);
+      ctx.lineTo(96 * s, 108 * s);
+      ctx.lineTo(84 * s, 156 * s);
+      ctx.lineTo(120 * s, 84 * s);
+      ctx.lineTo(96 * s, 84 * s);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    drawIcon('c192', 192);
+    drawIcon('c512', 512);
+
+    function download(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+  </script>
+</body>
+</html>

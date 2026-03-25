@@ -13,6 +13,10 @@ import InvitePage from './pages/InvitePage'
 // Code-split protected routes
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const AdminPage = lazy(() => import('./pages/AdminPage'))
+const AdminLeadsPage = lazy(() => import('./pages/AdminLeadsPage'))
+const AdminEmailStatsPage = lazy(() => import('./pages/AdminEmailStatsPage'))
+const AdminFunnelPage = lazy(() => import('./pages/AdminFunnelPage'))
+const AdminWorkoutCreatorPage = lazy(() => import('./pages/AdminWorkoutCreatorPage'))
 const WorkoutsPage = lazy(() => import('./pages/WorkoutsPage'))
 const WorkoutDetailPage = lazy(() => import('./pages/WorkoutDetailPage'))
 const CheckInPage = lazy(() => import('./pages/CheckInPage'))
@@ -56,6 +60,10 @@ export default function App() {
 
             {/* Protected: Admin */}
             <Route path="/admin" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminPage /></PrivateRoute>} />
+            <Route path="/admin/leads" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminLeadsPage /></PrivateRoute>} />
+            <Route path="/admin/email-stats" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminEmailStatsPage /></PrivateRoute>} />
+            <Route path="/admin/funnel" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminFunnelPage /></PrivateRoute>} />
+            <Route path="/admin/workouts/new" element={<PrivateRoute requiredRoles={['super_admin', 'operator']}><AdminWorkoutCreatorPage /></PrivateRoute>} />
           </Routes>
         </Suspense>
       </BrowserRouter>
